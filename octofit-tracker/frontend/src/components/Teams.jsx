@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { teamsEndpoint, requireCodespaceName } from '../api';
+import { requireCodespaceName } from '../api';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
@@ -8,7 +8,9 @@ function Teams() {
   const warning = requireCodespaceName();
 
   useEffect(() => {
-    const endpoint = teamsEndpoint;
+    const endpoint = import.meta.env.VITE_CODESPACE_NAME
+      ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams`
+      : 'http://localhost:8000/api/teams';
 
     fetch(endpoint)
       .then((response) => {

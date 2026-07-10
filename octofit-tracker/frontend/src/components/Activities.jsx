@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { activitiesEndpoint, requireCodespaceName } from '../api';
+import { requireCodespaceName } from '../api';
 
 function Activities() {
   const [activities, setActivities] = useState([]);
@@ -8,7 +8,9 @@ function Activities() {
   const warning = requireCodespaceName();
 
   useEffect(() => {
-    const endpoint = activitiesEndpoint;
+    const endpoint = import.meta.env.VITE_CODESPACE_NAME
+      ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities`
+      : 'http://localhost:8000/api/activities';
 
     fetch(endpoint)
       .then((response) => {
