@@ -5,6 +5,10 @@ export const apiBaseUrl = codespaceName
   ? `https://${codespaceName}-8000.app.github.dev/api`
   : `${fallbackHost}/api`;
 
+export const usersEndpoint = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/users`
+  : `${fallbackHost}/api/users`;
+
 export const requireCodespaceName = () => {
   if (!codespaceName) {
     return 'VITE_CODESPACE_NAME is not defined. Add it to .env.local for Codespaces support.';
