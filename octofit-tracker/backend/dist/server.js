@@ -10,13 +10,16 @@ const teams_1 = __importDefault(require("./routes/teams"));
 const activities_1 = __importDefault(require("./routes/activities"));
 const leaderboard_1 = __importDefault(require("./routes/leaderboard"));
 const workouts_1 = __importDefault(require("./routes/workouts"));
-const api_1 = require("./config/api");
+const codespaceName = process.env.CODESPACE_NAME;
+const baseUrl = codespaceName
+    ? `https://${codespaceName}-8000.app.github.dev`
+    : 'http://localhost:8000';
 const app = (0, express_1.default)();
 const port = process.env.PORT ? Number(process.env.PORT) : 8000;
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 app.use(express_1.default.json());
 app.get('/api/health', (_req, res) => {
-    res.json({ status: 'ok', apiUrl: api_1.baseUrl });
+    res.json({ status: 'ok', apiUrl: baseUrl, codespaceName: codespaceName || null });
 });
 app.use('/api/users', users_1.default);
 app.use('/api/teams', teams_1.default);
@@ -29,7 +32,7 @@ mongoose_1.default
     console.log('Connected to MongoDB');
     app.listen(port, () => {
         console.log(`Backend listening on port ${port}`);
-        console.log(`API base URL: ${api_1.baseUrl}`);
+        console.log(`API base URL: ${baseUrl}`);
     });
 })
     .catch((error) => {
