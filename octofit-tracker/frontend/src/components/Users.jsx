@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { buildEndpoint, requireCodespaceName } from '../api';
+import { usersEndpoint, requireCodespaceName } from '../api';
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -8,7 +8,7 @@ function Users() {
   const warning = requireCodespaceName();
 
   useEffect(() => {
-    const endpoint = buildEndpoint('users');
+    const endpoint = usersEndpoint;
 
     fetch(endpoint)
       .then((response) => {

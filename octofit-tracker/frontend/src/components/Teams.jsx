@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { buildEndpoint, requireCodespaceName } from '../api';
+import { teamsEndpoint, requireCodespaceName } from '../api';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
@@ -8,7 +8,7 @@ function Teams() {
   const warning = requireCodespaceName();
 
   useEffect(() => {
-    const endpoint = buildEndpoint('teams');
+    const endpoint = teamsEndpoint;
 
     fetch(endpoint)
       .then((response) => {

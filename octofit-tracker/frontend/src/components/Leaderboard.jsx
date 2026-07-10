@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { buildEndpoint, requireCodespaceName } from '../api';
+import { leaderboardEndpoint, requireCodespaceName } from '../api';
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -8,7 +8,7 @@ function Leaderboard() {
   const warning = requireCodespaceName();
 
   useEffect(() => {
-    const endpoint = buildEndpoint('leaderboard');
+    const endpoint = leaderboardEndpoint;
 
     fetch(endpoint)
       .then((response) => {

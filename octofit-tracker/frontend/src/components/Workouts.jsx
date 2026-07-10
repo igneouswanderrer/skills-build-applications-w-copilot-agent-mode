@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { buildEndpoint, requireCodespaceName } from '../api';
+import { workoutsEndpoint, requireCodespaceName } from '../api';
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
@@ -8,7 +8,7 @@ function Workouts() {
   const warning = requireCodespaceName();
 
   useEffect(() => {
-    const endpoint = buildEndpoint('workouts');
+    const endpoint = workoutsEndpoint;
 
     fetch(endpoint)
       .then((response) => {
